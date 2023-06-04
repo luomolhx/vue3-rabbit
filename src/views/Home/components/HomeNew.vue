@@ -11,7 +11,7 @@ const getNewList = async () => {
   newList.value = res.result
 }
 
-onMounted(() => getNewList())
+getNewList()
 </script>
 
 <template>
