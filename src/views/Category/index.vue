@@ -1,17 +1,21 @@
 <script setup>
 import { getCategoryAPI } from '@/apis/category'
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, onBeforeRouteUpdate } from 'vue-router'
 import { getBannerAPI } from '@/apis/home'
 import GoodsItem from '../Home/components/GoodsItem.vue'
 // 获取数据
 const categoryData = ref({})
 const route = useRoute()
-const getCategory = async () => {
-  const res = await getCategoryAPI(route.params.id)
+const getCategory = async (id = route.params.id) => {
+  const res = await getCategoryAPI(id)
   categoryData.value = res.result
 }
 onMounted(() => getCategory())
+// 切换路由时 可以重新发送分类数据请求
+onBeforeRouteUpdate((to, from) => {
+  getCategory(to.params.id)
+})
 
 // 获取banner
 const bannerList = ref([])

@@ -16,6 +16,7 @@ onMounted(() => categoryStore.getCategory())
   <LayoutSticky />
   <LayoutNav />
   <LayoutHeader />
+  <!-- 添加key 破坏vue复用机制 强制销毁重建 :key="$route.fullPath"-->
   <RouterView />
   <LayoutFooter />
 </template>
